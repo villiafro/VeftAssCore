@@ -121,7 +121,7 @@ namespace CoursesAPI.Services.Services
 					
 				}).ToList();
 
-			if(acceptLang.StartsWith("en")){
+			if(acceptLang.Contains("en") && !acceptLang.Contains("is")){
 				for(int i = 0; i < courses.Count(); i++){
 					courses[i].Name = (from ct in _courseTemplates.All()
 						where ct.CourseID == courses[i].TemplateID
