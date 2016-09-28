@@ -22,9 +22,13 @@ namespace CoursesAPI.Controllers
 		{
 			// TODO: figure out the requested language (if any!)
 			// and pass it to the service provider!
-			Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-			Console.WriteLine(Request.Headers);
-			return Ok(_service.GetCourseInstancesBySemester(semester));
+			//Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+			//Console.WriteLine(Request.Headers["Accept-Language"]);
+			//Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+			var acceptLang = Request.Headers["Accept-Language"];
+
+			return Ok(_service.GetCourseInstancesBySemester(semester, acceptLang));
 		}
 
 		/// <summary>

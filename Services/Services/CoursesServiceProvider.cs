@@ -4,6 +4,7 @@ using CoursesAPI.Models;
 using CoursesAPI.Services.DataAccess;
 using CoursesAPI.Services.Exceptions;
 using CoursesAPI.Services.Models.Entities;
+using System;
 
 namespace CoursesAPI.Services.Services
 {
@@ -97,12 +98,16 @@ namespace CoursesAPI.Services.Services
 		/// </summary>
 		/// <param name="semester"></param>
 		/// <returns></returns>
-		public List<CourseInstanceDTO> GetCourseInstancesBySemester(string semester = null)
+		public List<CourseInstanceDTO> GetCourseInstancesBySemester(string semester = null, string acceptLang = null)
 		{
 			if (string.IsNullOrEmpty(semester))
 			{
 				semester = "20153";
 			}
+
+			// Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+			// Console.WriteLine(acceptLang);
+			// Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
 			var courses = (from c in _courseInstances.All()
 				join ct in _courseTemplates.All() on c.CourseID equals ct.CourseID
@@ -115,6 +120,14 @@ namespace CoursesAPI.Services.Services
 					MainTeacher        = ""
 					
 				}).ToList();
+
+			if(acceptLang.StartsWith("en")){
+				for(int i = 0; i < courses.Count(); i++){
+					courses[i].Name = (from ct in _courseTemplates.All()
+						where ct.CourseID == courses[i].TemplateID
+						select ct.NameEN).SingleOrDefault();
+				}
+			}
 
 			var teach = (from teacher in _teacherRegistrations.All()
 				join person in _persons.All() on teacher.SSN equals person.SSN
