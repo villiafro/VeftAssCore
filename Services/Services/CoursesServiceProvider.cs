@@ -98,11 +98,14 @@ namespace CoursesAPI.Services.Services
 		/// </summary>
 		/// <param name="semester"></param>
 		/// <returns></returns>
-		public List<CourseInstanceDTO> GetCourseInstancesBySemester(string semester = null, string acceptLang = null)
+		public object GetCourseInstancesBySemester(string semester = null, string acceptLang = null, string pageNr = null)
 		{
 			if (string.IsNullOrEmpty(semester))
 			{
 				semester = "20153";
+			}
+			if(string.IsNullOrEmpty(pageNr)){
+				pageNr = "1";
 			}
 
 			// Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
@@ -142,7 +145,23 @@ namespace CoursesAPI.Services.Services
 				}
 			}
 
-			return courses;
+			var items = courses.Skip((Int32.Parse(pageNr) - 1) * 10).Take(10).ToList();
+
+			var paging = new {
+				PageCount = (int)Math.Ceiling((double)courses.Count() / 10.0),
+				PageSize = 10,
+				PageNumber = Int32.Parse(pageNr),
+				TotalNumberOfItemes = courses.Count()
+			};
+
+			var envelope = new {
+				Items = items,
+				Paging = paging
+			};	
+
+			//TODO: throw error with message if pagenr is more than pageCount
+
+			return envelope;
 		}
 	}
 }

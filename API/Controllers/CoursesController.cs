@@ -18,7 +18,7 @@ namespace CoursesAPI.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult GetCoursesBySemester(string semester = null)
+		public IActionResult GetCoursesBySemester(string semester = null, string pageNr = null)
 		{
 			// TODO: figure out the requested language (if any!)
 			// and pass it to the service provider!
@@ -28,7 +28,7 @@ namespace CoursesAPI.Controllers
 
 			var acceptLang = Request.Headers["Accept-Language"];
 
-			return Ok(_service.GetCourseInstancesBySemester(semester, acceptLang));
+			return Ok(_service.GetCourseInstancesBySemester(semester, acceptLang, pageNr));
 		}
 
 		/// <summary>
