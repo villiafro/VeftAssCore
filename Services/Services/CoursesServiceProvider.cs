@@ -19,6 +19,7 @@ namespace CoursesAPI.Services.Services
 		public CoursesServiceProvider(IUnitOfWork uow)
 		{
 			_uow = uow;
+
 			_courseInstances      = _uow.GetRepository<CourseInstance>();
 			_courseTemplates      = _uow.GetRepository<CourseTemplate>();
 			_teacherRegistrations = _uow.GetRepository<TeacherRegistration>();

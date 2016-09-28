@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 
 using CoursesAPI.Models;
 using CoursesAPI.Services.DataAccess;
@@ -21,6 +22,8 @@ namespace CoursesAPI.Controllers
 		{
 			// TODO: figure out the requested language (if any!)
 			// and pass it to the service provider!
+			Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+			Console.WriteLine(Request.Headers);
 			return Ok(_service.GetCourseInstancesBySemester(semester));
 		}
 

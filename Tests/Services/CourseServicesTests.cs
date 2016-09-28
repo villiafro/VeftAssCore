@@ -112,61 +112,17 @@ namespace CoursesAPI.Tests.Services
 		/// TODO: implement this test, and several others!
 		/// </summary>
 		[Fact]
-		public void GetCoursesBySemester_Returns20153ListWhenNoDataDefined()
+		public void GetCoursesBySemester_ReturnsEmptyListWhenNoDataDefined()
 		{
 			// Arrange:
 
 			// Act:
-			var dto = _service.GetCourseInstancesBySemester(null);
+
 			// Assert:
-			Assert.Equal(1, dto.Count());
+			// Assert.True(true);
 		}
 
-		[Fact]
-		public void GetCoursesBySemester_ReturnsAllCoursesOnGivenSemester()
-		{
-			// Arrange:
-
-			// Act:
-			var dto20153 = _service.GetCourseInstancesBySemester("20153");
-			var dto20163 = _service.GetCourseInstancesBySemester("20163");
-			// Assert:
-			Assert.Equal(1, dto20153.Count());
-			Assert.Equal(1, dto20163.Count());
-		}
-
-		[Fact]
-		public void GetCoursesBySemester_ReturnsFieldOfMainTeacher()
-		{
-			// Arrange:
-
-			// Act:
-			var dto20163 = _service.GetCourseInstancesBySemester("20163");
-			// Assert:
-			Assert.NotEqual(null, dto20163[0].MainTeacher);
-		}
-
-		[Fact]
-		public void GetCoursesBySemester_ReturnsEmptyStringOfMainTeacher()
-		{
-			// Arrange:
-
-			// Act:
-			var dto20163 = _service.GetCourseInstancesBySemester("20163");
-			// Assert:
-			Assert.Equal("", dto20163[0].MainTeacher);
-		}
-
-		[Fact]
-		public void GetCoursesBySemester_ReturnsTheNameOfTheTeacher()
-		{
-			// Arrange:
-
-			// Act:
-			var dto20153 = _service.GetCourseInstancesBySemester("20153");
-			// Assert:
-			Assert.Equal("Daníel B. Sigurgeirsson", dto20153[0].MainTeacher);
-		}
+		// TODO!!! you should write more unit tests here!!!
 
 		#endregion
 
